@@ -45,7 +45,7 @@ export default function HomePage() {
                 Dashboard
               </button>
             </Link>
-            <Link href="/track-shipment">
+            <Link href="/track">
               <button className="px-6 py-3 bg-blue-700 hover:bg-blue-800 text-white rounded-lg shadow-md transition-transform transform hover:scale-105">
                 Track Shipment
               </button>
