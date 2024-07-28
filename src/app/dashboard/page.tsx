@@ -55,7 +55,17 @@ export default function DashboardPage() {
   };
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          console.log('Text copied to clipboard');
+        })
+        .catch(err => {
+          console.error('Could not copy text: ', err);
+        });
+    } else {
+      console.log('Clipboard API not available');
+    }
   };
 
   return (
@@ -161,4 +171,4 @@ export default function DashboardPage() {
       </div>
     </div>
   );
-}  
+}
