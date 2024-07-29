@@ -3,6 +3,10 @@
 import { useState, FormEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-solid-svg-icons';
+import dynamic from 'next/dynamic';
+import 'react-toastify/dist/ReactToastify.css'; // For toast notifications
+
+const SuprSendInbox = dynamic(() => import('@suprsend/react-inbox'), { ssr: false });
 
 interface Shipment {
   _id: string;
@@ -67,6 +71,11 @@ export default function DashboardPage() {
       console.log('Clipboard API not available');
     }
   };
+
+  // Ensure environment variables are defined
+  const workspaceKey = process.env.NEXT_PUBLIC_SUPRSEND_WORKSPACE_KEY || '';
+  const subscriberId = process.env.NEXT_PUBLIC_SUPRSEND_SUBSCRIBER_ID || '';
+  const distinctId = process.env.NEXT_PUBLIC_SUPRSEND_DISTINCT_ID || '';
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-900">
@@ -168,6 +177,16 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
+      </div>
+  
+      {/* App Inbox Component */}
+      <div className="fixed top-0 right-0 m-4 z-50">
+        <SuprSendInbox
+          workspaceKey={workspaceKey}
+          subscriberId={subscriberId}
+          distinctId={distinctId}
+          themeType="dark"
+        />
       </div>
     </div>
   );

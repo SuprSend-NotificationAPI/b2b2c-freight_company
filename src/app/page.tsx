@@ -3,6 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import 'react-toastify/dist/ReactToastify.css'; // For toast notifications
+
+const SuprSendInbox = dynamic(() => import('@suprsend/react-inbox'), { ssr: false });
 
 export default function HomePage() {
   const router = useRouter();
@@ -33,8 +37,24 @@ export default function HomePage() {
       setError('Failed to login');
     }
   };
+
+  // Ensure environment variables are defined
+  const workspaceKey = process.env.NEXT_PUBLIC_SUPRSEND_WORKSPACE_KEY || '';
+  const subscriberId = process.env.NEXT_PUBLIC_SUPRSEND_SUBSCRIBER_ID || '';
+  const distinctId = process.env.NEXT_PUBLIC_SUPRSEND_DISTINCT_ID || '';
+
   return (
     <div className="flex min-h-screen bg-gray-900 text-white">
+      {/* SuprSend Inbox */}
+      <div className="fixed top-0 right-0 m-4 z-50">
+        <SuprSendInbox
+          workspaceKey={workspaceKey}
+          subscriberId={subscriberId}
+          distinctId={distinctId}
+          themeType="dark"
+        />
+      </div>
+      
       <div className="flex flex-col justify-center w-full md:w-2/3 lg:w-1/2 p-6 md:p-12 lg:p-16">
         <div className="bg-gray-800 p-10 rounded-2xl shadow-2xl transform transition-transform hover:scale-105">
           <h1 className="text-5xl font-extrabold mb-6 text-blue-400">Welcome to The Trident Inc.</h1>
