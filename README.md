@@ -1,6 +1,6 @@
 # Freight Forwarder App - B2B2C Notification Usecases
 
-Welcome to the Freight Forwarder App! This application serves as a logistics solution for shipping packages worldwide. It includes a user-friendly interface for managing shipments and an authentication system for shipping companies and end-users.
+Welcome to the Freight Forwarder App! This application serves as a logistics solution for shipping packages worldwide. It includes a user-friendly interface for managing shipments and an authentication system for shipping companies and end-users. You can implement an app inbox in Next.js application by checking out this [guide](https://www.suprsend.com/post/implementing-app-inbox-in-next-js-application-as-a-developer)
 
 ## Live Demo
 
